@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title th:text="${title}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<nav class="container">
+    <ul>
+        <li><strong th:text="${yourTicket}"></strong></li>
+    </ul>
+    <ul>
+        <li><a th:href="@{/check}" th:text="${checkTicket}"></a></li>
+    </ul>
+</nav>
+
+<main class="container">
+    <form id="checkForm" action="/ticket" method="post">
+        <label for="firstName"></label>
+        <input type="text" id="firstName" name="firstName" required th:placeholder="${firstName}">
+
+        <label for="lastName"></label>
+        <input type="text" id="lastName" name="lastName" required th:placeholder="${lastName}">
+
+        <label for="email"></label>
+        <input type="text" id="email" name="email" required th:placeholder="${email}">
+
+        <input type="submit" onclick="checkEmail()" th:value="${checkTicket}" />
+    </form>
+
+    <!-- Обновление элемента с полученными данными -->
+    <div id="result"></div>
+
+    <script>
+        function checkEmail() {
+            var email = document.getElementById('email').value;
+            $.ajax({
+                type: 'POST',
+                url: '/ticket',
+                data: { 'email': email },
+                success: function(response) {
+                    $('#result').html(response);
+                },
+                error: function(error) {
+                    console.error('Ошибка при выполнении запроса:', error);
+                }
+            });
+        }
+    </script>
+
+    <h4 th:text="${videoDescription}"></h4>
+
+    <nav class="container">
+        <form th:action="@{/checklanguage}" method="post">
+            <select name="lang">
+                <option value="en">English</option>
+                <option value="uk">Українська</option>
+            </select>
+            <input type="submit" th:value="${changeLanguage}"/>
+        </form>
+    </nav>
+</main>
+
+<nav class="container">
+    <ul>
+        <li><a th:href="@{/}" th:text="${main}"></a></li>
+        <li><a th:href="@{/map}" th:text="${map}"></a></li>
+        <li><a th:href="@{/faq}" th:text="${faq}"></a></li>
+    </ul>
+</nav>
+</body>
+</html>
+

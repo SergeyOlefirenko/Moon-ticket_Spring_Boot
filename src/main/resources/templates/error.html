@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title th:text="${title}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+</head>
+<body>
+<nav class="container">
+    <ul>
+        <li><strong><a th:href="@{/}">Return to Main page</a></strong></li>
+    </ul>
+</nav>
+<main class="container">
+
+    <form method="post" accept-charset="UTF-8" th:object="${createPersonCommand}">
+        <div th:if="${createPersonCommand}">
+            <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span><br>
+            <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span><br>
+            <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br>
+            <span class="error" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span><br>
+        </div>
+    </form>
+
+</main>
+</body>
+</html>

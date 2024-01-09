@@ -1,0 +1,159 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 200vh;
+    /*background: url('/static/images/main.png') center/cover fixed; */
+    background: url('main.png') center/cover, 100% 100%;
+
+}
+
+.navbar, .footer {
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+.navbar {
+    top: 0;
+}
+
+.footer {
+    bottom: 0;
+    list-style: none;
+}
+
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+ul li::marker{
+    list-style: none;
+}
+
+/* Styles */
+#firstName, #lastName, #email, #country, #city{
+    border: none;
+
+}
+
+
+/*ul {*/
+/*    list-style: none;*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    gap: 25px;*/
+/*}*/
+
+
+/*ul li::marker{*/
+/*    list-style: none;*/
+/*}*/
+
+/*!* Styles *!*/
+.send{
+    color: white;
+}
+.confirm{
+    margin-top: 125px;
+    margin-right: 57%;
+}
+a:hover{
+    text-decoration: none;
+}
+.change{
+    /*color: white;*/
+}
+.result{
+    margin-right: 60%;
+}
+.changeName{
+    margin-left: 10%;
+}
+
+#firstName, #lastName, #email, #lang{
+    border: none;
+ height: 20px;
+    margin: 1px;
+}
+
+ #country, #city{
+     border: none;
+     margin: 1px;
+  }
+ .videoDesc{
+     font-size: 14px;
+     color: white;
+ }
+ .agr{
+     font-size: 8px;
+     color: white;
+ }
+ p{
+     padding-top: -30px;
+ }
+
+ .total p{
+     font-size: 11px;
+     color: white;
+ }
+.total{
+    text-align: center;
+    margin-right: 60%;
+    font-size: 11px;
+}
+.videoDesc{
+    margin-right: 60%;
+}
+
+/* .descContainer{*/
+/* }*/
+
+.desc{
+    font-size: 14px;
+    text-align: center;
+    margin-top: 1px;
+    color: white;
+}
+
+
+input{
+    width: 20px;
+}
+.first{
+    font-size: 14px;
+    color: white;
+}
+.last{
+    font-size: 14px;
+    color: white;
+}
+.mail{
+    font-size: 14px;
+    color: white;
+}
+.opt1{
+    font-size: 14px;
+color: #494747;
+}
+.opt2{
+    font-size: 14px;
+  color: #494747;
+}
+
+/*.container{*/
+/*}*/
+.registration{
+    margin-top: 150px;
+    margin-bottom: 50px;
+    margin-left: 35%;
+      width: 50vw;
+    font-size: 16px;
+ text-align: center;
+    align-items: center;
+}

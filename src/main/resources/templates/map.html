@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title th:text="${title}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+</head>
+<body>
+<nav class="container">
+    <ul>
+        <li><strong th:text="${yourTicket}"></strong></li>
+    </ul>
+    <ul>
+        <li><a th:href="@{/check}" th:text="${checkTicket}"></a></li>
+    </ul>
+</nav>
+
+<main class="container">
+
+<div>
+<tr>
+    <th><input type="submit" value="WORLD"></th>
+    <th><input type="submit" value="UKRAINE"></th>
+</tr>
+</div>
+
+<form method="get" th:action="@{/map}">
+    <label for="selectedCountry"></label>
+    <select id="selectedCountry" name="selectedCountry" onchange="this.form.submit()">
+        <option th:text="${selectCountryName}"></option>
+        <!-- Отображаем список стран из countries (из базы данных)-->
+        <option th:each="country : ${countries}" th:value="${country}"
+                th:text="${country}" th:selected="${country == selectedCountry}">
+        </option>
+    </select>
+</form>
+
+    <!-- Проверяем, выбрана ли страна -->
+    <h4 th:if="${selectedCountry != null}">
+        <h4><span th:text="${selectedCountry}"></span></h4>
+        <h4 th:text="${statistics}"></h4>
+        <table>
+            <tbody>
+            <!-- Проверяем, есть ли данные для отображения -->
+            <tr th:if="${locationCountDTOList != null and locationCountDTOList.size() > 0}" th:each="locationCountDTO : ${locationCountDTOList}">
+                <td th:text="${locationCountDTO.city}"></td>
+                <td th:text="${locationCountDTO.count}" class="count-column"></td>
+            </tr>
+            <style>
+                /* Применяем отступ справа для столбца count, если он необходим */
+                .count-column {
+                    padding-right: 10px;
+                }
+            </style>
+
+            <!-- Выводим сообщение, если данных нет -->
+            <tr th:unless="${locationCountDTOList != null and locationCountDTOList.size() > 0}">
+                <td colspan="2">No data available</td>
+            </tr>
+            </tbody>
+
+            <tfoot>
+            <!-- Выводим данные только при наличии данных -->
+            <tr th:if="${locationCountDTOList != null and locationCountDTOList.size() > 0}">
+                <td th:text="${totalSold}"></td>
+                <td th:text="${totalCountryCount}"></td>
+            </tr>
+            </tfoot>
+        </table>
+    </h4>
+
+<h4 th:text="${videoDescription}"></h4>
+
+    <nav class="container">
+        <form th:action="@{/maplanguage}" method="post">
+            <select name="lang">
+                <option value="en">English</option>
+                <option value="uk">Українська</option>
+            </select>
+            <input type="submit" th:value="${changeLanguage}"/>
+        </form>
+    </nav>
+</main>
+
+
+<nav class="container">
+    <ul>
+        <li><a th:href="@{/}" th:text="${main}"></a></li>
+        <li><a th:href="@{/map}" th:text="${map}"></a></li>
+        <li><a th:href="@{/faq}" th:text="${faq}"></a></li>
+    </ul>
+</nav>
+</body>
+</html>

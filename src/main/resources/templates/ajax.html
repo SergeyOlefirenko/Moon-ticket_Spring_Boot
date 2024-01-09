@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax</title>
+</head>
+<body>
+<nav>
+    <menu>
+        <li><a th:href="@{/}">Return to Main page</a></li>
+    </menu>
+</nav>
+<main>
+    <div>
+        <div>
+            <label for="firstName">Имя:</label>
+            <input id="firstName"/>
+        </div>
+        <div>
+            <label for="lastName">Фамилия:</label>
+            <input id="lastName"/>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input id="email"/>
+        </div>
+        <div>
+            <label for="city">City:</label>
+            <input id="city"/>
+        </div>
+        <button id="save" type="button">Save</button>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>E-mail</th>
+            <th>Город</th>
+            <th>Название</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        const baseUrl = "/api/people";
+
+        // load person
+        function init() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", baseUrl);
+            xhr.send();
+            xhr.addEventListener("readystatechange", function () {
+                console.log(`readyState: ${this.readyState}`);
+                if (this.readyState === this.DONE) {
+                    console.log(`status: ${this.status}`);
+                    console.log(`statusText: ${this.statusText}`);
+                    const json = this.responseText;
+                    console.log(`responseText: ${json}`);
+                    const people = JSON.parse(json);
+                    console.dir(people);
+                    populateTable(people);
+                }
+            });
+        }
+
+        function populateTable(people, isClear = true) {
+            const tbody = document.querySelector("tbody");
+            if (isClear) tbody.innerHTML = '';
+            people.forEach(person => {
+                tbody.append(createRow(person));
+            });
+        }
+
+        function createRow(person) {
+            const tr = document.createElement('tr');
+            const properties = ['id', 'firstName', 'lastName',
+                'email', 'country', 'city', 'status'];
+            properties.forEach(prop => {
+                let td = document.createElement('td');
+                td.append(document.createTextNode(person[prop]));
+                tr.append(td);
+            });
+            return tr;
+        }
+
+        // Save person
+        const button = document.querySelector("#save");
+        const firstNameField = document.querySelector("#firstName");
+        const lastNameField = document.querySelector("#lastName");
+        const country = document.querySelector("#country");
+        const city = document.querySelector("#city");
+        const emailField = document.querySelector("#email");
+        const status = document.querySelector("#status");
+        button.addEventListener("click", async () => {
+            const person = {
+                firstName: firstNameField.value,
+                lastName: lastNameField.value,
+                country: country.value,
+                city: city.value,
+                email: emailField.value,
+                status: status.value
+            };
+            const response = await fetch(baseUrl, {
+                method: 'POST',
+                body: JSON.stringify(person)
+            });
+            const savedPerson = response.json();
+            populateTable([savedPerson], false);
+            // const xhr = new XMLHttpRequest();
+            //
+            // xhr.open("POST", baseUrl);
+            // xhr.setRequestHeader("Content-Type", "application/json");
+            //
+            // xhr.send(JSON.stringify(person));
+            // xhr.addEventListener('readystatechange', () => {
+            //     if (xhr.readyState === xhr.DONE) {
+            //         const savedStudent = JSON.parse(xhr.responseText);
+            //         populateTable([savedPerson], false);
+            //     }
+            // });
+        });
+
+        init();
+    </script>
+</main>
+</body>
+</html>

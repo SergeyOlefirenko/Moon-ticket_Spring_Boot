@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title th:text="${title}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+</head>
+<body>
+<nav class="container">
+    <ul>
+        <li><strong th:text="${yourTicket}"></strong></li>
+    </ul>
+    <ul>
+        <li><a th:href="@{/check}" th:text="${checkTicket}"></a></li>
+    </ul>
+</nav>
+
+<main class="container">
+
+
+    <h2 th:text="${faqGreetings}"></h2>
+    <br>
+    <h4 th:text="${faqDescription}"></h4>
+
+    <h4 th:text="${videoDescription}"></h4>
+
+    <nav class="container">
+        <form th:action="@{/faqlanguage}" method="post">
+            <select name="lang">
+                <option value="en">English</option>
+                <option value="uk">Українська</option>
+            </select>
+            <input type="submit" th:value="${changeLanguage}"/>
+        </form>
+    </nav>
+</main>
+
+
+<nav class="container">
+    <ul>
+        <li><a th:href="@{/}" th:text="${main}"></a></li>
+        <li><a th:href="@{/map}" th:text="${map}"></a></li>
+        <li><a th:href="@{/faq}" th:text="${faq}"></a></li>
+    </ul>
+</nav>
+</body>
+</html>
+
+

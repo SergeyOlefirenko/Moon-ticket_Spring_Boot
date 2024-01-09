@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+
+    <title th:text="${title}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+</head>
+<body>
+<nav class="navbar">
+    <ul>
+        <li><strong th:text="${yourTicket}"></strong></li>
+    </ul>
+    <ul>
+        <li><a th:href="@{/check}" th:text="${checkTicket}"></a></li>
+    </ul>
+</nav>
+
+
+<main class="container">
+    <div class="descContainer">
+        <p class="desc" th:text="${description}"></p>
+    </div>
+
+    <div class="registration">
+
+
+    <form name="registrationForm" method="post" accept-charset="UTF-8" th:action="@{/registration}" th:object="${person}" onsubmit="updateHiddenFields()">
+        <div th:if="${person}">
+            <label for="firstName"></label>
+            <input class="first" type="text" id="firstName" name="firstName" th:field="*{firstName}" required th:placeholder="${firstName}" />
+
+            <label for="lastName"></label>
+            <input class="last" type="text" id="lastName" name="lastName" th:field="*{lastName}" required th:placeholder="${lastName}" />
+
+            <label for="email"></label>
+            <input class="mail" type="email" id="email" name="email" th:field="*{email}" required th:placeholder="${email}" />
+
+            <label for="country"></label>
+            <select class="opt1" id="country" name="country" onchange="loadCities()">
+                <option th:value="${person.country}" th:text="${countryName}" selected="selected"></option>
+                <option th:each="country : ${countries}" th:value="${country}" th:text="${country}"></option>
+            </select>
+
+            <label for="city"></label>
+            <select class="opt2" id="city" name="city">
+                <option th:value="${person.city}" th:text="${locationName}" selected="selected"></option>
+            </select>
+
+                        <script th:inline="javascript">
+                            function loadCities() {
+                                var selectedCountry = document.getElementById("country").value;
+                                var citySelect = document.getElementById("city");
+
+                                // Очищаем список городов
+                                while (citySelect.firstChild) {
+                                    citySelect.removeChild(citySelect.firstChild);
+                                }
+
+                                // Если выбрана страна, загружаем города для нее
+                                if (selectedCountry) {
+                                    var url = '/filtered-data/cities?country=' + encodeURIComponent(selectedCountry);
+
+                                    fetch(url)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            data.forEach(city => {
+                                                var option = document.createElement('option');
+                                                option.value = city;
+                                                option.text = city;
+                                                citySelect.appendChild(option);
+                                            });
+                                        })
+                                        .catch(error => console.error('Error:', error));
+                                }
+                            }
+                        </script>
+            <br />
+        </div>
+        <div class="confirm">
+            <a class="send" href="#" th:text="${sendName}" onclick="document.forms['registrationForm'].submit(); return false;"></a>
+            <!--            <input class="send" type="submit" th:value="${sendName}" />-->
+        </div>
+    </form>
+
+
+    <div class="total" th:if="${totalCount}">
+        <p class="agr" th:text="${agreement}"></p>
+        <p th:text="${totalCount}"></p>
+    </div>
+
+<div class="result">
+    <h4 th:if="${status == 'CONFIRMED'}">
+        <span th:text="${statusOk}"></span>
+    </h4>
+    <h4 th:if="${status == 'NOT_CONFIRMED'}">
+        <span th:text="${statusBad}"></span>
+    </h4>
+    <h4 th:if="${status == 'ERROR'}">
+        <span th:text="An error occurred"></span>
+    </h4>
+</div>
+
+    <h4 class="videoDesc" th:text="${videoDescription}"></h4>
+
+    <nav class="container">
+        <div class="changeName">
+        <form name="changeLanguage" th:action="@{/changeLanguage}" method="post">
+            <label>
+                <select name="lang">
+                    <option value="en">English</option>
+                    <option value="uk">Українська</option>
+                </select>
+            </label>
+            <!--            <input type="submit" th:value="${changeLanguage}"/>-->
+            <a class="change" href="#" th:text="${changeLanguage}" onclick="document.forms['changeLanguage'].submit(); return false;"></a>
+        </form>
+        </div>
+    </nav>
+
+    </div>
+</main>
+
+
+<footer class="footer">
+    <ul>
+        <li><a th:href="@{/}" th:text="${main}"></a></li>
+        <li><a th:href="@{/map}" th:text="${map}"></a></li>
+        <li><a th:href="@{/faq}" th:text="${faq}"></a></li>
+    </ul>
+</footer>
+
+</body>
+</html>
+
+
+
+
+
+
