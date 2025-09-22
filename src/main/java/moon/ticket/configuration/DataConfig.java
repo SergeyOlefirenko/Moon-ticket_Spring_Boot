@@ -104,7 +104,7 @@ public class DataConfig {
         //}
     //}
 
-он заменяет весь этот код:
+//он заменяет весь этот код:
 //    public void addAttributesToModel(Model model, LanguageWrapper lang) {
 //    Map<String, String> langData = languageData().get(lang.getLang());
 //
