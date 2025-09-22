@@ -39,50 +39,128 @@ public class DataConfig {
         }
     }
 
-public void addAttributesToModel(Model model, LanguageWrapper lang) {
-    Map<String, String> langData = languageData().get(lang.getLang());
+    public void addAttributesToModel(Model model, LanguageWrapper lang) {
+        Map<String, String> langData = languageData().get(lang.getLang());
 
-        model.addAttribute("yourTicket", getValue(langData, "yourTicket"));
-        model.addAttribute("checkTicket", getValue(langData, "checkTicket"));
-        model.addAttribute("description", getValue(langData, "description"));
-        model.addAttribute("firstName", getValue(langData, "firstName"));
-        model.addAttribute("lastName", getValue(langData, "lastName"));
-        model.addAttribute("email", getValue(langData, "email"));
-        model.addAttribute("countryName", getValue(langData, "countryName"));
-        model.addAttribute("locationName", getValue(langData, "locationName"));
-        model.addAttribute("sendName", getValue(langData, "sendName"));
-        model.addAttribute("agreement", getValue(langData, "agreement"));
-        model.addAttribute("videoDescription", getValue(langData, "videoDescription"));
-        model.addAttribute("main", getValue(langData, "main"));
-        model.addAttribute("map", getValue(langData, "map"));
-        model.addAttribute("faq", getValue(langData, "faq"));
-        model.addAttribute("statistics", getValue(langData, "statistics"));
-        model.addAttribute("totalSold", getValue(langData, "totalSold"));
-        model.addAttribute("selectCountryName", getValue(langData, "selectCountryName"));
-        model.addAttribute("greetings", getValue(langData, "greetings"));
-        model.addAttribute("information", getValue(langData, "information"));
-        model.addAttribute("moonTicket", getValue(langData, "moonTicket"));
-        model.addAttribute("location", getValue(langData, "location"));
-        model.addAttribute("locationParameter", getValue(langData, "locationParameter"));
-        model.addAttribute("rocket", getValue(langData, "rocket"));
-        model.addAttribute("rocketName", getValue(langData, "rocketName"));
-        model.addAttribute("departure", getValue(langData, "departure"));
-        model.addAttribute("arrival", getValue(langData, "arrival"));
-        model.addAttribute("earthName", getValue(langData, "earthName"));
-        model.addAttribute("moonName", getValue(langData, "moonName"));
-        model.addAttribute("download", getValue(langData, "download"));
-        model.addAttribute("faqGreetings", getValue(langData, "faqGreetings"));
-        model.addAttribute("faqDescription", getValue(langData, "faqDescription"));
-        model.addAttribute("checkAgain", getValue(langData, "checkAgain"));
-        model.addAttribute("statusOk", getValue(langData, "statusOk"));
-        model.addAttribute("statusBad", getValue(langData, "statusBad"));
-        model.addAttribute("changeLanguage", getValue(langData, "changeLanguage"));
+        for (Map.Entry<String, String> entry : langData.entrySet()) {
+            model.addAttribute(entry.getKey(), entry.getValue());
+        }
     }
 
-    private String getValue(Map<String, String> langData, String key) {
-        return langData.get(key);
-    }
+//public void addAttributesToModel(Model model, LanguageWrapper lang) {
+    //Map<String, String> langData = languageData().get(lang.getLang());
+
+        //model.addAttribute("yourTicket", getValue(langData, "yourTicket"));
+        //model.addAttribute("checkTicket", getValue(langData, "checkTicket"));
+        //model.addAttribute("description", getValue(langData, "description"));
+        //model.addAttribute("firstName", getValue(langData, "firstName"));
+        //model.addAttribute("lastName", getValue(langData, "lastName"));
+        //model.addAttribute("email", getValue(langData, "email"));
+        //model.addAttribute("countryName", getValue(langData, "countryName"));
+        //model.addAttribute("locationName", getValue(langData, "locationName"));
+        //model.addAttribute("sendName", getValue(langData, "sendName"));
+        //model.addAttribute("agreement", getValue(langData, "agreement"));
+        //model.addAttribute("videoDescription", getValue(langData, "videoDescription"));
+        //model.addAttribute("main", getValue(langData, "main"));
+        //model.addAttribute("map", getValue(langData, "map"));
+        //model.addAttribute("faq", getValue(langData, "faq"));
+        //model.addAttribute("statistics", getValue(langData, "statistics"));
+        //model.addAttribute("totalSold", getValue(langData, "totalSold"));
+        //model.addAttribute("selectCountryName", getValue(langData, "selectCountryName"));
+        //model.addAttribute("greetings", getValue(langData, "greetings"));
+        //model.addAttribute("information", getValue(langData, "information"));
+        //model.addAttribute("moonTicket", getValue(langData, "moonTicket"));
+        //model.addAttribute("location", getValue(langData, "location"));
+        //model.addAttribute("locationParameter", getValue(langData, "locationParameter"));
+        //model.addAttribute("rocket", getValue(langData, "rocket"));
+        //model.addAttribute("rocketName", getValue(langData, "rocketName"));
+        //model.addAttribute("departure", getValue(langData, "departure"));
+        //model.addAttribute("arrival", getValue(langData, "arrival"));
+        //model.addAttribute("earthName", getValue(langData, "earthName"));
+        //model.addAttribute("moonName", getValue(langData, "moonName"));
+        //model.addAttribute("download", getValue(langData, "download"));
+        //model.addAttribute("faqGreetings", getValue(langData, "faqGreetings"));
+        //model.addAttribute("faqDescription", getValue(langData, "faqDescription"));
+        //model.addAttribute("checkAgain", getValue(langData, "checkAgain"));
+        //model.addAttribute("statusOk", getValue(langData, "statusOk"));
+        //model.addAttribute("statusBad", getValue(langData, "statusBad"));
+        //model.addAttribute("changeLanguage", getValue(langData, "changeLanguage"));
+    //}
+
+    //private String getValue(Map<String, String> langData, String key) {
+        //return langData.get(key);
+    //}
 
 
 }
+
+ //Полностью рабочий вариант
+
+//public void addAttributesToModel(Model model, LanguageWrapper lang) {
+       // Map<String, String> langData = languageData().get(lang.getLang());
+
+       // for (Map.Entry<String, String> entry : langData.entrySet()) {
+           // model.addAttribute(entry.getKey(), entry.getValue());
+        //}
+    //}
+
+он заменяет весь этот код:
+//    public void addAttributesToModel(Model model, LanguageWrapper lang) {
+//    Map<String, String> langData = languageData().get(lang.getLang());
+//
+//        model.addAttribute("yourTicket", getValue(langData, "yourTicket"));
+//        model.addAttribute("checkTicket", getValue(langData, "checkTicket"));
+//        model.addAttribute("description", getValue(langData, "description"));
+//        model.addAttribute("firstName", getValue(langData, "firstName"));
+//        model.addAttribute("lastName", getValue(langData, "lastName"));
+//        model.addAttribute("email", getValue(langData, "email"));
+//        model.addAttribute("countryName", getValue(langData, "countryName"));
+//        model.addAttribute("locationName", getValue(langData, "locationName"));
+//        model.addAttribute("sendName", getValue(langData, "sendName"));
+//        model.addAttribute("agreement", getValue(langData, "agreement"));
+//        model.addAttribute("videoDescription", getValue(langData, "videoDescription"));
+//        model.addAttribute("main", getValue(langData, "main"));
+//        model.addAttribute("map", getValue(langData, "map"));
+//        model.addAttribute("faq", getValue(langData, "faq"));
+//        model.addAttribute("statistics", getValue(langData, "statistics"));
+//        model.addAttribute("totalSold", getValue(langData, "totalSold"));
+//        model.addAttribute("selectCountryName", getValue(langData, "selectCountryName"));
+//        model.addAttribute("greetings", getValue(langData, "greetings"));
+//        model.addAttribute("information", getValue(langData, "information"));
+//        model.addAttribute("moonTicket", getValue(langData, "moonTicket"));
+//        model.addAttribute("location", getValue(langData, "location"));
+//        model.addAttribute("locationParameter", getValue(langData, "locationParameter"));
+//        model.addAttribute("rocket", getValue(langData, "rocket"));
+//        model.addAttribute("rocketName", getValue(langData, "rocketName"));
+//        model.addAttribute("departure", getValue(langData, "departure"));
+//        model.addAttribute("arrival", getValue(langData, "arrival"));
+//        model.addAttribute("earthName", getValue(langData, "earthName"));
+//        model.addAttribute("moonName", getValue(langData, "moonName"));
+//        model.addAttribute("download", getValue(langData, "download"));
+//        model.addAttribute("faqGreetings", getValue(langData, "faqGreetings"));
+//        model.addAttribute("faqDescription", getValue(langData, "faqDescription"));
+//        model.addAttribute("checkAgain", getValue(langData, "checkAgain"));
+//        model.addAttribute("statusOk", getValue(langData, "statusOk"));
+//        model.addAttribute("statusBad", getValue(langData, "statusBad"));
+//        model.addAttribute("changeLanguage", getValue(langData, "changeLanguage"));
+//    }
+//    private String getValue(Map<String, String> langData, String key) {
+//        return langData.get(key);
+//    }
+
+//Вариант №2 (может быть использован с дополнениями если ключи не найдены)
+
+//        public void addAttributesToModel(Model model, LanguageWrapper lang) {
+//        Map<String, String> langData = languageData().get(lang.getLang());
+//
+//        for (Map.Entry<String, String> entry : langData.entrySet()) {
+//            String key = entry.getKey();
+//            String value = getValue(langData, key);
+//            model.addAttribute(key, value);
+//        }
+//    }
+//
+//    private String getValue(Map<String, String> langData, String key) {
+//        return langData.get(key);
+//    }
 
